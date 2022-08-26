@@ -60,7 +60,7 @@ def test_get_single_movie(client, add_movie):
 
 
 def test_get_single_movie_incorrect_id(client):
-    resp = client.get(f"/api/movies/foo/")
+    resp = client.get("/api/movies/foo/")
     assert resp.status_code == 404
 
 
@@ -69,7 +69,7 @@ def test_get_single_movie_incorrect_id(client):
 def test_get_all_movies(client, add_movie):
     movie_one = add_movie(title="The Big Lebowski", genre="comedy", year="1998")
     movie_two = add_movie("No Country for Old Men", "thriller", "2007")
-    resp = client.get(f"/api/movies/")
+    resp = client.get("/api/movies/")
     assert resp.status_code == 200
     assert resp.data[0]["title"] == movie_one.title
     assert resp.data[1]["title"] == movie_two.title
@@ -95,7 +95,7 @@ def test_remove_movie(client, add_movie):
 # Request database access explicitly decorator(@pytest.mark.django_db)
 @pytest.mark.django_db
 def test_remove_movie_incorrect_id(client):
-    resp = client.delete(f"/api/movies/99/")
+    resp = client.delete("/api/movies/99/")
     assert resp.status_code == 404
 
 
@@ -122,7 +122,7 @@ def test_update_movie(client, add_movie):
 # Request database access explicitly decorator(@pytest.mark.django_db)
 @pytest.mark.django_db
 def test_update_movie_incorrect_id(client):
-    resp = client.put(f"/api/movies/99/")
+    resp = client.put("/api/movies/99/")
     assert resp.status_code == 404
 
 
